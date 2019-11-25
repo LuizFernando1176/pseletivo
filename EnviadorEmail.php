@@ -14,7 +14,7 @@ use email\Exception as Exception;
 //use PHPMailer\PHPMailer\PHPMailer;
 //use PHPMailer\PHPMailer\SMTP;
 //use PHPMailer\PHPMailer\Exception;
-
+$id = $_GET['id'];
 $email = $_GET['email'];
 $nome = $_GET['nome'];
 $codigo = $_GET['codigo'];

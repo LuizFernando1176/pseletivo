@@ -2,7 +2,6 @@
 include_once 'util/conectarBD.php';
 $conn = conecta();
 $id = $_GET ['id'];
-
 $queryBusca = "SELECT * FROM `tb_candidato` WHERE id=$id";
 $queryRespostaBusca = mysqli_query($conn, $queryBusca);
 $queryRespostasBusca = mysqli_fetch_assoc($queryRespostaBusca);
