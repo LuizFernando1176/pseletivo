@@ -1,5 +1,7 @@
 <?php
 include_once 'selects/selects.php';
+
+$alert = $_GET['alert'];
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -23,15 +25,30 @@ include_once 'selects/selects.php';
             form input{
                 width: 50% !important;
             }
+            #divAlerta{
+                z-index: 1;
+                margin: 10% 30% 0 30%;
+            }
         </style>
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <script>
+        function mostraAlerta(){
+            $("#alerta").fadein(500);
+            $("#alerta").fadeout(5000);
+        }
+        </script>
     </head>
-    <body>
+    <body onload="mostraAlerta();">
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
         <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div id="divAlerta" style="visibility:<?php echo $alert == 1? "visible" : "hidden";?>">
+            <div id="alerta" class="alert alert-danger" role="alert">
+                Candidato nÃ£o pÃ´de ser cadastrado!
+            </div>
+        </div>
         <div class="container" >
             <center> <img src="img/logo.jpg" class="img-fluid" width="150" height="150"  /></center>
             <h1 class="text-center text-info" >Preencha os dados do Candidato</h1>
@@ -47,7 +64,7 @@ include_once 'selects/selects.php';
                     <input type="text" name="cpf" placeholder="CPF" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="text" name="endereco" placeholder="Endereço" class="form-control">
+                    <input type="text" name="endereco" placeholder="EndereÃ§o" class="form-control">
                 </div>
                 <div class="form-group">
                     <input type="text" placeholder="CEP" name="cep" class="form-control">

@@ -1,14 +1,16 @@
 <?php
 include_once '../util/conectarBD.php';
+include_once '../util/antiInjection.php';
+
 $conn = conecta();
-$nome = $_POST['nome'];
-$cep = $_POST ['cep'];
-$cpf = $_POST ['cpf'];
-$senha = $_POST ['senha'];
-$email = $_POST['email'];
-$endereco = $_POST['endereco'];
-$telefone =$_POST['telefone'];
-$id_cargo =$_POST['id_cargo'];
+$nome = anti_injection($_POST['nome']);
+$cep = anti_injection($_POST ['cep']);
+$cpf = anti_injection($_POST ['cpf']);
+$senha = anti_injection($_POST ['senha']);
+$email = anti_injection($_POST['email']);
+$endereco = anti_injection($_POST['endereco']);
+$telefone = anti_injection($_POST['telefone']);
+$id_cargo = anti_injection($_POST['id_cargo']);
 $codigo = date('His').$id_cargo;
 
 echo $codigo;
@@ -27,8 +29,5 @@ if($queryBuscaCandidato != false){
     header('Location:../EnviadorEmail.php?id='.$id.'&nome='.$nome.'&email='.$email.'&codigo='.$codigo);
     
 } else {
-
-    echo 'O cadastro não foi realizado
-        ';
-    
+    header("Location: ../formulario.php?alert=1");
 }
