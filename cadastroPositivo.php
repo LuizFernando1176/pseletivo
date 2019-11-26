@@ -1,23 +1,16 @@
 <?php
 include_once 'util/conectarBD.php';
+include_once 'util/corpo.php';
 $conn = conecta();
 $id = $_GET ['id'];
 $queryBusca = "SELECT * FROM `tb_candidato` WHERE id=$id";
 $queryRespostaBusca = mysqli_query($conn, $queryBusca);
 $queryRespostasBusca = mysqli_fetch_assoc($queryRespostaBusca);
+cabeca();
+descricaoPositivo();
 ?>
 
-<html>
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Confimação de Cadastro</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-              rel="stylesheet">
-        <script src="js/bootstrap.bundle.mim.js" type="text/javascript"></script>
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    </head>
 
     <body>
         <div class="container">

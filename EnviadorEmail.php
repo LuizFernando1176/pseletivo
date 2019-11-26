@@ -1,55 +1,60 @@
 <?php
-// Import PHPMailer classes into the global namespace
-// These must be at the top of your script, not inside a function
 include_once './email/PHPMailer.php';
 include_once './email/POP3.php';
 include_once './email/SMTP.php';
 include_once './email/OAuth.php';
 include_once './email/Exception.php';
+include_once './util/antiInjection.php';
 
 
 use email\PHPMailer as PHPMailer;
 use email\SMTP as SMTP;
 use email\Exception as Exception;
-//use PHPMailer\PHPMailer\PHPMailer;
-//use PHPMailer\PHPMailer\SMTP;
-//use PHPMailer\PHPMailer\Exception;
-$id = $_GET['id'];
-$email = $_GET['email'];
-$nome = $_GET['nome'];
-$codigo = $_GET['codigo'];
+
+$id = anti_injection($_GET['id']);
+$email = anti_injection($_GET['email']);
+$nome = anti_injection($_GET['nome']);
+$codigo = anti_injection($_GET['codigo']);
 
 
-// Instantiation and passing `true` enables exceptions
+// passando 'true' habilita exceÃ§Ãµes
 $mail = new PHPMailer(true);
 
 try {
-    //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
-    $mail->isSMTP();                                            // Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-    $mail->Username   = 'naorespondaprocseletivo@gmail.com';                     // SMTP username
-    $mail->Password   = 'solectron';                               // SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-    $mail->Port       = 587;                                    // TCP port to connect to
+    //ConfiguraÃ§Ãµes de servidor
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Habilita uma saÃ­da de debug verbose
+    $mail->isSMTP();                                            // Enviar usando SMTP
+    $mail->Host       = 'smtp.gmail.com';                       // Configura o servidor SMTP
+    $mail->SMTPAuth   = true;                                   // Habilita AutenticaÃ§Ã£o SMTP
+    $mail->Username   = 'naorespondaprocseletivo@gmail.com';    // nome do usuÃ¡rio SMTP
+    $mail->Password   = 'solectron';                            // senha SMTP
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Habilita TLS. TambÃ©m aceita `PHPMailer::ENCRYPTION_SMTPS`
+    $mail->Port       = 587;                                    // Porta TCP
 
-    //Recipients
+    //DestinatÃ¡rio
     $mail->setFrom('naorespondaprocseletivo@gmail.com', 'Processo seletivo');
-    $mail->addAddress($email, $nome);     // Add a recipient Repetir essa linha para outro destinatario
-    // Attachments
-    //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-    //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+    $mail->addAddress($email, $nome);                           // Adiciona um destinatÃ¡rio. Repetir essa linha para outro destinatÃ¡rio.
+    
+    // Anexos
+    //$mail->addAttachment('/var/tmp/file.tar.gz');             // Adiciona anexo
+    //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');        // Nome alternativo do arquivo (opcional)
 
-    // Content
-    $mail->isHTML(true);                                  // Set email format to HTML
+    // Corpo
+    $mail->isHTML(true);                                        // Configura o conteÃºdo do email para o formato HTML
     $mail->Subject = 'Prefeitura Municipal de Olinda - Processo seletivo';
-    $mail->Body    = utf8_decode('<p>Parabéns!</p><p>Seu cadastro foi realizado com sucesso!</p><br><p>Seu código de cadastro é: '.$codigo.'</p>');
-    //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mail->Body    = utf8_decode('<center><h2>Sistema de Cadastro de Processo seletivo da Perfeitura Municipal de Olinda</h2></center>'
+            . '<p>Esta Ã© uma mensagem automÃ¡tica.</p><br><br>'
+            . '<h4>ParabÃ©ns, '.$nome.'!</h4>'
+            . '<p>Seu cadastro foi realizado com sucesso!</p>'
+            . '<p>Seu cÃ³digo de cadastro Ã©: <strong>'.$codigo.'</strong></p>'
+            . '<br><br><br>'
+            . '<hr>'
+            . '<center><h6>Perfeitura Municipal de Olinda</h6></center>');
+    //$mail->AltBody = 'Corpo do e-mail em texto puro para clientes que nÃ£o usam HTML';
 
     $mail->send();
-    echo 'Message has been sent';
+    echo 'Mensagem enviada';
     header('Location: cadastroPositivo.php?id='.$id);
 } catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    echo "Mensagem nÃ£o pode ser enviada. Erro do e-mail: {$mail->ErrorInfo}";
 }

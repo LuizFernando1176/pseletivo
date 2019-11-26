@@ -14,23 +14,23 @@
     </head>
     <body>
         <div class="login-form">
-            <h2 class="text-center">Secretaria de Saúde</h2>
-            <form action="/examples/actions/confirmation.php" method="post">
+            <h2 class="text-center text-white"><strong>Secretaria de Saúde</strong></h2>
+            <form action="inserir/inserirLogin.php" method="post">
                 <div class="avatar">
-                    <img src="img/avatar.png" alt="Avatar">
+                    <img src="img/avatar.png" alt="Avatar" class="img-thumbnail">
                 </div>           
                 <div class="form-group">
-                    <input type="text" class="form-control input-lg" name="username" placeholder="Username" required="required">
+                    <input type="text" class="form-control input-lg" name="cpf" placeholder="CPF" required="required">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control input-lg" name="password" placeholder="Password" required="required">
+                    <input type="password" class="form-control input-lg" name="senha" placeholder="Senha" required="required">
                 </div>        
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Sign in</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Entrar</button>
                 </div>
-                <p class="hint-text">Don't have an account? <a href="#">Sign up here</a></p>
+                
             </form>
-            <div class="form-footer"><a href="#">Forgot Your Password?</a></div>
+           
         </div>
     </body>
 </html>                            
