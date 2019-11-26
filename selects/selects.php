@@ -3,7 +3,7 @@
 include_once 'util/conectarBD.php';
 
 function selectCargo() {
-    $retorno = "<select class='form-group' name='id_cargo'>"
+    $retorno = "<select class='form-control' style='width:50%' name='id_cargo'>"
     ."<option >Selecione o cargo</option>";
     $con = conecta();
     $consulta = "SELECT * FROM tb_cargo;";
