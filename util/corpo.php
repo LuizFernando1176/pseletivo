@@ -8,10 +8,7 @@ $usuarioLogado = json_decode($_SESSION["gmUsuarioLogado"], true);
 function cabeca() {
 
     echo '<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -32,7 +29,7 @@ function cabeca() {
       
     </head>
     <nav class="navbar navbar-light bg-light fixed-top text-white" style="background-color:#006eb4 !important;">
-  <a class=" text-right " >Secretaria de Saúde de Olinda</a> <P><strong>Seja Bem vindo(a),' . $_SESSION['nome']  . ' </strong></P>
+  <a class=" text-right " >Secretaria de Saúde de Olinda</a> <P><strong>Seja Bem vindo(a),' . $_SESSION['nome'] . ' </strong></P>
   <a class="navbar-brand btn btn-dark text-white" href="' . urlbase() . '/sair.php"><i class="material-icons">
                                     exit_to_app
                                 </i>Sair</a>
@@ -51,8 +48,8 @@ function descricaoPositivo() {
     echo '<title>Confimação de Cadastro</title>';
 }
 
-function rodape(){
-    
+function rodape() {
+
     echo '<hr>
 
 <footer>
